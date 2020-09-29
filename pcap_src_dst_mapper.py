@@ -2,7 +2,7 @@ import dpkt
 import socket
 import geoip2.database
 
-reader = geoip2.database.Reader('/root/Downloads/geolite_database/GeoLite2-City_20200707/GeoLite2-City.mmdb')
+reader = geoip2.database.Reader('GeoLite2-City_20200707/GeoLite2-City.mmdb')
 
 def printPcap(pcap):
 	for (ts, buf) in pcap:
