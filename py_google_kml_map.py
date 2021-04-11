@@ -44,8 +44,10 @@ def plotIps(pcap):
 			pass
 	return kmlPts
 			
-			
+
+# main function()
 def main():
+	# collect the required options passed to script
 	parser = optparse.OptionParser('[*]Run: python3 script.py -f <pcap_file>')
 	parser.add_option('-f', dest='pcap_file', type='string', help='input the correct file')
 	(options, args) = parser.parse_args()
@@ -58,14 +60,18 @@ def main():
 	pcap = dpkt.pcap.Reader(f)
 	kmlheader = '<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document>\n'
 	kmlfooter = '</Document>\n</kml>\n'
+	# set the structure of the KML document
 	kmldoc = kmlheader+plotIps(pcap)+kmlfooter
 	print(kmldoc)
 	print()
+	# save  the generated kml structure
 	document = open('traffic_map.kml', 'w')
 	document.write(kmldoc)
 	document.close
 	print('[*]Your kml document has being created: "trafficmap.kml".')
 	
+
+# start main function()
 if __name__ == '__main__':
 	main()
 	

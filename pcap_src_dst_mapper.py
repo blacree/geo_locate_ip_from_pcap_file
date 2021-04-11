@@ -2,9 +2,12 @@ import dpkt
 import socket
 import geoip2.database
 
+# Set the Geolite database to be used
 reader = geoip2.database.Reader('GeoLite2-City_20200707/GeoLite2-City.mmdb')
 
+
 def printPcap(pcap):
+	# Extract source and destination ip address information from each respective packet
 	for (ts, buf) in pcap:
 		try:
 			eth = dpkt.ethernet.Ethernet(buf)
@@ -22,19 +25,22 @@ def printPcap(pcap):
 				country1 = rec1.country.name
 				city2 = rec2.city.name
 				country2 = rec2.country.name
+				# Print extracted information to screen
 				print('[+]Src: ' + str(city1) + ', ' + str(country1) + ' -> Dest: ' + str(city2) + ', ' + str(country2))
 				
 		except:
 			pass
 			
 
-
+# main function()
 def main():
 	f = open('/root/Documents/fuzz-2006-07-06-5536.pcap', 'rb')
 	pcap = dpkt.pcap.Reader(f)
 	print(pcap)
 	printPcap(pcap)
 	
+
+# start main function
 main()
 
 
