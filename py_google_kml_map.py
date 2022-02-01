@@ -6,6 +6,7 @@ import geoip2.database
 import dpkt
 import socket
 import optparse
+import sys
 
 reader = geoip2.database.Reader('GeoLite2-City_20200707/GeoLite2-City.mmdb')
 
@@ -148,7 +149,8 @@ def plotIps(pcap):
 # main function()
 def main():
 	# collect the required options passed to script
-	parser = optparse.OptionParser('[*]Run: python3 script.py -f <pcap_file>')
+	file_name = sys.argv[0]
+	parser = optparse.OptionParser('[*]Run: python3 '+ file_name + ' -f <pcap_file>')
 	parser.add_option('-f', dest='pcap_file', type='string', help='input the correct file')
 	(options, args) = parser.parse_args()
 	if (options.pcap_file == None):
